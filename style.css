@@ -1,0 +1,1372 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+/* ========================================================================== */
+/* [ROOT VARIABLES & RESET] Base Theme Tokens | Updated: 2026-11-11 02:48    */
+/* ========================================================================== */
+:root {
+  --bg-color: #0e0d0c; /* Deep, warm almost-black */
+  --bg-surface: #141311;
+  --bg-card: #181614;
+  --bg-elevated: #1e1c19;
+  
+  --text-cream: #f4efe6; /* Soft warm cream */
+  --text-muted: #aba497; /* Warm muted cream */
+  --text-dim: #7d776d;
+  
+  --border-subtle: rgba(244, 239, 230, 0.1);
+  --border-accent: rgba(244, 239, 230, 0.25);
+  --border-active: rgba(203, 180, 147, 0.6);
+  --accent-gold: #cbb493; /* Warm atelier gold */
+  --accent-gold-glow: rgba(203, 180, 147, 0.35);
+
+  --font-heading: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  width: 100%;
+  min-height: 100%;
+  background-color: var(--bg-color);
+  color: var(--text-cream);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ========================================================================== */
+/* [ANALOG GRAIN TEXTURE] Pseudo-Element Noise Overlay | Preserved: 2026-11-11 02:48 */
+/* ========================================================================== */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Global Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--text-cream);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* ========================================================================== */
+/* [SECTION HEADERS] Reusable Section Titles | Updated: 2026-11-11 02:48       */
+/* ========================================================================== */
+.section-header {
+  margin-bottom: 3.5rem;
+  max-width: 720px;
+}
+
+.section-tag {
+  font-size: 0.74rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  display: block;
+  margin-bottom: 0.8rem;
+}
+
+.section-title {
+  font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+  font-weight: 300;
+  line-height: 1.15;
+  color: var(--text-cream);
+  margin-bottom: 1rem;
+}
+
+.section-desc {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+  font-weight: 300;
+}
+
+/* ========================================================================== */
+/* [BUTTONS] Interactive Studio Actions | Updated: 2026-11-11 02:48          */
+/* ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.95rem 2.2rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-sm {
+  padding: 0.65rem 1.4rem;
+  font-size: 0.75rem;
+}
+
+.btn-full {
+  width: 100%;
+}
+
+.btn-primary {
+  background-color: var(--text-cream);
+  color: var(--bg-color);
+  border: 1px solid var(--text-cream);
+}
+
+.btn-primary:hover {
+  background-color: transparent;
+  color: var(--text-cream);
+  box-shadow: 0 0 16px rgba(244, 239, 230, 0.2);
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--text-cream);
+  border: 1px solid var(--border-subtle);
+}
+
+.btn-outline:hover {
+  border-color: var(--text-cream);
+  background-color: rgba(244, 239, 230, 0.06);
+}
+
+/* ========================================================================== */
+/* [NAVIGATION & LOGO] Header & Brand | Updated: 2026-11-11 02:48             */
+/* ========================================================================== */
+.studio-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1.5rem 7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background-color: rgba(14, 13, 12, 0.85);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-heading);
+  font-size: 1.55rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--text-cream);
+}
+
+.logo:hover {
+  color: var(--text-cream);
+}
+
+/* Small square logo made of two nested rectangles in gold color */
+.logo::before {
+  content: "";
+  display: inline-block;
+  width: 17px;
+  height: 17px;
+  border: 1.5px solid var(--accent-gold); /* Outer gold rectangle */
+  outline: 1.5px solid var(--accent-gold); /* Inner nested gold rectangle */
+  outline-offset: -4px;
+  margin-right: 0.85rem;
+  flex-shrink: 0;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+.logo:hover::before {
+  transform: rotate(90deg);
+  box-shadow: 0 0 10px var(--accent-gold-glow);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2.2rem;
+}
+
+.nav-links a {
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.nav-links a:hover {
+  color: var(--text-cream);
+}
+
+.nav-links .nav-cta {
+  padding: 0.55rem 1.3rem;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-cream);
+  font-size: 0.74rem;
+  letter-spacing: 0.18em;
+  border-radius: var(--radius-sm);
+}
+
+.nav-links .nav-cta:hover {
+  border-color: var(--text-cream);
+  background-color: rgba(244, 239, 230, 0.08);
+}
+
+main {
+  padding-top: 5rem;
+}
+
+/* ========================================================================== */
+/* [HERO SECTION] Studio Entrance | Updated: 2026-11-11 02:48                 */
+/* ========================================================================== */
+.hero-section {
+  min-height: calc(100vh - 5rem);
+  padding: 5rem 7% 6rem;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 5rem;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero-eyebrow {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: var(--accent-gold);
+  margin-bottom: 1.4rem;
+}
+
+.hero-title {
+  font-size: clamp(3rem, 5.5vw, 5.4rem);
+  line-height: 1.08;
+  font-weight: 300;
+  margin-bottom: 2rem;
+  color: var(--text-cream);
+}
+
+.hero-title em {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.hero-subtitle {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--text-muted);
+  max-width: 540px;
+  margin-bottom: 3rem;
+  font-weight: 300;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Studio Visual Frame in Hero */
+.hero-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.studio-frame {
+  width: 100%;
+  max-width: 440px;
+  aspect-ratio: 4 / 5;
+  background-color: #12100e;
+  border: 1px solid var(--border-subtle);
+  position: relative;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: stretch;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.studio-frame::after {
+  content: "";
+  position: absolute;
+  inset: 1rem;
+  border: 1px solid rgba(244, 239, 230, 0.12);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.frame-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(35%) contrast(110%) brightness(80%);
+  opacity: 0.75;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+}
+
+.studio-frame:hover .frame-image {
+  transform: scale(1.03);
+  opacity: 0.9;
+}
+
+.frame-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2rem;
+  z-index: 4;
+  background: linear-gradient(
+    to top,
+    rgba(14, 13, 12, 0.94) 0%,
+    rgba(14, 13, 12, 0.35) 40%,
+    transparent 100%
+  );
+}
+
+.crosshair {
+  position: absolute;
+  font-family: monospace;
+  font-size: 1rem;
+  color: rgba(244, 239, 230, 0.4);
+  line-height: 1;
+}
+
+.crosshair.top-left { top: 0.5rem; left: 0.5rem; }
+.crosshair.top-right { top: 0.5rem; right: 0.5rem; }
+.crosshair.bottom-left { bottom: 0.5rem; left: 0.5rem; }
+.crosshair.bottom-right { bottom: 0.5rem; right: 0.5rem; }
+
+.frame-caption {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  border-top: 1px solid rgba(244, 239, 230, 0.15);
+  padding-top: 1rem;
+}
+
+.frame-caption .aperture {
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+}
+
+.frame-caption .edition {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--text-cream);
+  letter-spacing: 0.03em;
+}
+
+/* ========================================================================== */
+/* [CSS FEATURE 01] Darkroom Photo Editor Styles | Added: 2026-11-11 02:48    */
+/* ========================================================================== */
+.darkroom-section {
+  padding: 7rem 7%;
+  border-top: 1px solid var(--border-subtle);
+  background-color: var(--bg-surface);
+}
+
+.darkroom-workspace {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+/* Live Stage & Dropzone */
+.darkroom-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: sticky;
+  top: 6.5rem;
+}
+
+.darkroom-dropzone {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2.5rem 2rem 1.8rem;
+  background-color: var(--bg-color);
+  border: 1px dashed var(--border-subtle);
+  border-radius: var(--radius-sm);
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.darkroom-dropzone.drag-active {
+  border-color: var(--accent-gold);
+  background-color: rgba(203, 180, 147, 0.05);
+}
+
+.dropzone-hint {
+  margin-top: 1.2rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* Editor Frame Styles */
+.editor-frame-container {
+  width: 100%;
+  max-width: 480px;
+  aspect-ratio: 4 / 5;
+  background-color: #0c0b0a;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s ease;
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+}
+
+/* Frame Variant: Passe-Partout */
+.editor-frame-container.frame-passepartout {
+  padding: 2.2rem 2.2rem 3.6rem;
+  border: 2px solid #23201d;
+  background: #11100e;
+  box-shadow: 0 0 0 10px #0e0d0c, 0 30px 70px rgba(0, 0, 0, 0.9);
+}
+
+/* Frame Variant: Gallery Mat */
+.editor-frame-container.frame-gallery {
+  padding: 3.5rem 3.5rem 4.8rem;
+  border: 1px solid var(--border-subtle);
+  background: #161513;
+  box-shadow: 0 0 0 16px #080807, 0 35px 80px rgba(0, 0, 0, 0.95);
+}
+
+/* Frame Variant: Fine Line */
+.editor-frame-container.frame-minimal {
+  padding: 1rem;
+  border: 1px solid var(--accent-gold);
+  background: transparent;
+}
+
+/* Frame Variant: Borderless */
+.editor-frame-container.frame-raw {
+  padding: 0;
+  border: none;
+}
+
+.editor-frame-container.frame-raw .frame-imprint {
+  display: none;
+}
+
+/* Image Wrapper inside Editor */
+.editor-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #080807;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#editorPreviewImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: filter 0.15s ease;
+}
+
+/* Grain & Vignette Simulation Layers */
+.editor-grain-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.3;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  transition: opacity 0.2s ease;
+}
+
+.editor-vignette-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.4;
+  background: radial-gradient(circle at center, transparent 40%, rgba(0, 0, 0, 0.95) 100%);
+  transition: opacity 0.2s ease;
+}
+
+/* Watermark & Imprint */
+.frame-imprint {
+  position: absolute;
+  bottom: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  text-align: center;
+  pointer-events: none;
+}
+
+.imprint-title {
+  font-family: var(--font-heading);
+  font-size: 0.88rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+}
+
+.imprint-meta {
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* Darkroom Controls Console */
+.darkroom-controls {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 2.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.2rem;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.control-label {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--accent-gold);
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 0.5rem;
+}
+
+.upload-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.upload-btn {
+  cursor: pointer;
+}
+
+.or-divider {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.sample-plates {
+  display: flex;
+  gap: 0.65rem;
+}
+
+.sample-btn {
+  flex: 1;
+  padding: 0.55rem 0.8rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  border-radius: var(--radius-sm);
+  transition: all 0.25s ease;
+}
+
+.sample-btn:hover {
+  color: var(--text-cream);
+  border-color: var(--border-accent);
+}
+
+.sample-btn.active {
+  background-color: rgba(203, 180, 147, 0.15);
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+}
+
+/* Preset Pills */
+.preset-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.preset-pill {
+  padding: 0.5rem 0.95rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  border-radius: var(--radius-sm);
+  transition: all 0.25s ease;
+}
+
+.preset-pill:hover {
+  color: var(--text-cream);
+  border-color: var(--border-accent);
+}
+
+.preset-pill.active {
+  background-color: var(--text-cream);
+  color: var(--bg-color);
+  border-color: var(--text-cream);
+  font-weight: 500;
+}
+
+/* Sliders */
+.slider-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.slider-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.slider-val {
+  font-family: monospace;
+  color: var(--accent-gold);
+  font-size: 0.8rem;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 3px;
+  background: #2a2723;
+  outline: none;
+  border-radius: 2px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent-gold);
+  cursor: pointer;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
+  transition: transform 0.2s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.25);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent-gold);
+  border: none;
+  cursor: pointer;
+}
+
+/* Frame Selectors */
+.frame-selectors {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.65rem;
+}
+
+.frame-btn {
+  padding: 0.6rem 0.85rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  border-radius: var(--radius-sm);
+  transition: all 0.25s ease;
+  text-align: center;
+}
+
+.frame-btn:hover {
+  color: var(--text-cream);
+  border-color: var(--border-accent);
+}
+
+.frame-btn.active {
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+  background-color: rgba(203, 180, 147, 0.1);
+}
+
+.darkroom-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+/* ========================================================================== */
+/* [CSS FEATURE 02] Enhanced Portfolio with Filters | Updated: 2026-11-11 02:48 */
+/* ========================================================================== */
+.portfolio-section {
+  padding: 7rem 7%;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.portfolio-filters {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 0.5rem 1.1rem;
+  font-size: 0.76rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  border-radius: var(--radius-sm);
+  transition: all 0.25s ease;
+}
+
+.filter-btn:hover {
+  color: var(--text-cream);
+  border-color: var(--border-accent);
+}
+
+.filter-btn.active {
+  background-color: var(--text-cream);
+  color: var(--bg-color);
+  border-color: var(--text-cream);
+  font-weight: 500;
+}
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+  margin-top: 3.5rem;
+}
+
+.portfolio-card {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.portfolio-card.is-hidden {
+  display: none;
+}
+
+.card-image-wrap {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background-color: #161513;
+  border: 1px solid var(--border-subtle);
+  position: relative;
+  margin-bottom: 1.25rem;
+}
+
+.card-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%) contrast(105%) brightness(85%);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+}
+
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(14, 13, 12, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card-overlay span {
+  font-size: 0.75rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-cream);
+  padding: 0.5rem 1.2rem;
+  border: 1px solid var(--border-accent);
+  backdrop-filter: blur(8px);
+}
+
+.portfolio-card:hover .card-image-wrap img {
+  transform: scale(1.04);
+  filter: grayscale(10%) contrast(108%) brightness(95%);
+}
+
+.portfolio-card:hover .card-overlay {
+  opacity: 1;
+}
+
+.card-meta {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+}
+
+.card-num {
+  font-size: 0.8rem;
+  font-family: monospace;
+  color: var(--accent-gold);
+  letter-spacing: 0.1em;
+  padding-top: 0.2rem;
+}
+
+.card-info h3 {
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--text-cream);
+  margin-bottom: 0.2rem;
+}
+
+.card-info p {
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ========================================================================== */
+/* [CSS FEATURE 03] Studio Services & Packages | Added: 2026-11-11 02:48      */
+/* ========================================================================== */
+.services-section {
+  padding: 7rem 7%;
+  border-top: 1px solid var(--border-subtle);
+  background-color: var(--bg-surface);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.2rem;
+  align-items: stretch;
+}
+
+.service-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 3rem 2.4rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.service-card:hover {
+  border-color: var(--border-accent);
+  transform: translateY(-4px);
+}
+
+.service-card.service-featured {
+  border-color: var(--accent-gold);
+  background: linear-gradient(180deg, #1f1c18 0%, #151311 100%);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+}
+
+.featured-badge {
+  position: absolute;
+  top: -0.75rem;
+  right: 2rem;
+  background-color: var(--accent-gold);
+  color: #0e0d0c;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 0.25rem 0.8rem;
+  border-radius: var(--radius-sm);
+}
+
+.service-index {
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.service-title {
+  font-size: 1.85rem;
+  font-weight: 300;
+  color: var(--text-cream);
+  margin-bottom: 1.2rem;
+  line-height: 1.2;
+}
+
+.service-desc {
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+}
+
+.service-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-bottom: 2.5rem;
+  flex-grow: 1;
+}
+
+.service-features li {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.service-features li::before {
+  content: "—";
+  color: var(--accent-gold);
+}
+
+.service-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 1.8rem;
+}
+
+.service-rate {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  color: var(--text-cream);
+  font-weight: 400;
+}
+
+/* Statement Section */
+.statement-section {
+  padding: 8rem 7%;
+  border-top: 1px solid var(--border-subtle);
+  background-color: var(--bg-color);
+  text-align: center;
+}
+
+.statement-container {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.statement-eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  margin-bottom: 2rem;
+}
+
+.statement-quote {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  line-height: 1.35;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text-cream);
+  margin-bottom: 2.2rem;
+}
+
+.statement-author {
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ========================================================================== */
+/* [CSS FEATURE 04] Contact & Inquiry Form | Added: 2026-11-11 02:48          */
+/* ========================================================================== */
+.contact-section {
+  padding: 8rem 7%;
+  border-top: 1px solid var(--border-subtle);
+  background-color: var(--bg-surface);
+}
+
+.contact-container {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+.contact-subtext {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin-bottom: 3rem;
+}
+
+.studio-coords {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 2rem;
+}
+
+.coord-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.coord-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+}
+
+.coord-val {
+  font-size: 0.95rem;
+  color: var(--text-cream);
+}
+
+.inquiry-form {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-field label {
+  font-size: 0.74rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  background-color: #12100e;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-cream);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  border-radius: var(--radius-sm);
+  outline: none;
+  transition: border-color 0.25s ease, background-color 0.25s ease;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-color: var(--accent-gold);
+  background-color: #161412;
+}
+
+.form-field select option {
+  background-color: #161412;
+  color: var(--text-cream);
+}
+
+.submit-btn {
+  margin-top: 0.5rem;
+}
+
+.form-success-banner {
+  padding: 1.2rem;
+  background-color: rgba(203, 180, 147, 0.12);
+  border: 1px solid var(--accent-gold);
+  border-radius: var(--radius-sm);
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-cream);
+}
+
+/* ========================================================================== */
+/* [CSS FEATURE 05] Fullscreen Lightbox Modal | Added: 2026-11-11 02:48       */
+/* ========================================================================== */
+.lightbox-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.lightbox-modal.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(10, 9, 8, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.lightbox-dialog {
+  position: relative;
+  z-index: 2;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: -2.5rem;
+  right: 0;
+  font-size: 2.2rem;
+  line-height: 1;
+  color: var(--text-cream);
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.lightbox-close:hover {
+  color: var(--accent-gold);
+  transform: rotate(90deg);
+}
+
+.lightbox-media {
+  max-height: 75vh;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
+  border: 1px solid var(--border-subtle);
+  background-color: #0c0b0a;
+}
+
+.lightbox-media img {
+  max-width: 85vw;
+  max-height: 75vh;
+  display: block;
+  object-fit: contain;
+}
+
+.lightbox-details {
+  text-align: center;
+}
+
+.lightbox-title {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--text-cream);
+  margin-bottom: 0.3rem;
+}
+
+.lightbox-meta {
+  font-size: 0.78rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+}
+
+/* ========================================================================== */
+/* [FOOTER] Studio Colophon | Updated: 2026-11-11 02:48                      */
+/* ========================================================================== */
+.studio-footer {
+  padding: 5rem 7% 3rem;
+  border-top: 1px solid var(--border-subtle);
+  background-color: var(--bg-color);
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 3rem;
+  margin-bottom: 4rem;
+}
+
+.footer-brand p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  max-width: 320px;
+  margin-top: 0.8rem;
+}
+
+.footer-links {
+  display: flex;
+  gap: 2.5rem;
+}
+
+.footer-links a {
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.footer-links a:hover {
+  color: var(--text-cream);
+}
+
+.footer-bottom {
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 2rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: rgba(171, 164, 151, 0.6);
+}
+
+/* ========================================================================== */
+/* [RESPONSIVE BREAKPOINTS] Mobile & Tablet Adaptations | Updated: 2026-11-11 */
+/* ========================================================================== */
+@media (max-width: 1024px) {
+  .hero-section {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    padding-top: 3rem;
+  }
+
+  .darkroom-workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .darkroom-stage {
+    position: static;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-container {
+    grid-template-columns: 1fr;
+    gap: 3.5rem;
+  }
+
+  .portfolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .studio-frame {
+    max-width: 380px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-links a:not(.nav-cta) {
+    display: none;
+  }
+
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .inquiry-form {
+    padding: 1.8rem;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    gap: 2rem;
+  }
+}

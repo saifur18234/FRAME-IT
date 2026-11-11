@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FRAMEIT — Luxury Dark Photo Studio &amp; Atelier</title>
+  
+  <!-- Google Fonts: Cormorant Garamond (Headings) & DM Sans (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ======================================================== -->
+  <!-- [FEATURE 01] Navigation Header | Added: 2026-11-11 02:48 -->
+  <!-- ======================================================== -->
+  <header class="studio-header">
+    <a href="#" class="logo">Frame It</a>
+    <nav class="nav-links">
+      <a href="#darkroom">Darkroom Editor</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#services">Services</a>
+      <a href="#atelier">Philosophy</a>
+      <a href="#contact" class="nav-cta">Inquire</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ======================================================== -->
+    <!-- [FEATURE 02] Hero Section | Added: 2026-11-11 02:48     -->
+    <!-- ======================================================== -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <p class="hero-eyebrow">Darkroom &amp; Photographic Atelier</p>
+        <h1 class="hero-title">Sculpted Light.<br><em>Timeless</em> Presence.</h1>
+        <p class="hero-subtitle">
+          An intimate studio dedicated to fine-art portraiture, high fashion, and cinematic still life. We compose every frame with nuanced shadow and warm, analog tonality.
+        </p>
+        <div class="hero-actions">
+          <a href="#darkroom" class="btn btn-primary">Open Darkroom Editor</a>
+          <a href="#portfolio" class="btn btn-outline">Explore Archive</a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="studio-frame">
+          <img 
+            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=80" 
+            alt="Editorial Portraiture" 
+            class="frame-image"
+          >
+          <div class="frame-content">
+            <span class="crosshair top-left">+</span>
+            <span class="crosshair top-right">+</span>
+            <span class="crosshair bottom-left">+</span>
+            <span class="crosshair bottom-right">+</span>
+            <div class="frame-caption">
+              <span class="aperture">ƒ / 1.4 &nbsp;·&nbsp; 50mm &nbsp;·&nbsp; ISO 100</span>
+              <span class="edition">Series 01 // The Warm Obsidian</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- [FEATURE 03] Interactive Darkroom Photo Editor Section | Added: 2026-11-11 02:48 -->
+    <!-- Allows visitors to upload photos or use presets, apply warm dark studio  -->
+    <!-- grading, adjust grain/vignette/tone, select bespoke frames and download. -->
+    <!-- ========================================================================= -->
+    <section id="darkroom" class="darkroom-section">
+      <div class="section-header">
+        <span class="section-tag">Interactive Workshop</span>
+        <h2 class="section-title">The Darkroom Atelier</h2>
+        <p class="section-desc">Grade your photographs with our proprietary warm-dark studio tones, sculpt analog 35mm grain, and frame your work for exhibition.</p>
+      </div>
+
+      <div class="darkroom-workspace">
+        <!-- Live Preview Stage -->
+        <div class="darkroom-stage">
+          <div class="darkroom-dropzone" id="dropZone">
+            <div class="editor-frame-container frame-passepartout" id="editorFrameContainer">
+              <!-- Live Preview Image Element -->
+              <div class="editor-image-wrapper">
+                <img 
+                  id="editorPreviewImg" 
+                  src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=80" 
+                  alt="Editor Live Preview" 
+                  crossorigin="anonymous"
+                >
+                <!-- Grain Overlay layer -->
+                <div class="editor-grain-layer" id="editorGrainLayer"></div>
+                <!-- Vignette Overlay layer -->
+                <div class="editor-vignette-layer" id="editorVignetteLayer"></div>
+              </div>
+              <!-- Frame Typography / Watermark -->
+              <div class="frame-imprint" id="frameImprint">
+                <span class="imprint-title">FRAME IT ATELIER</span>
+                <span class="imprint-meta" id="imprintMeta">OBSIDIAN ARCHIVE · 2026</span>
+              </div>
+            </div>
+            
+            <div class="dropzone-hint">
+              <span>Drag &amp; drop an image here, or upload below</span>
+            </div>
+          </div>
+
+          <!-- Hidden processing canvas for high-res rendering & download -->
+          <canvas id="darkroomCanvas" style="display: none;"></canvas>
+        </div>
+
+        <!-- Darkroom Control Console -->
+        <div class="darkroom-controls">
+          <!-- Image Source Selector -->
+          <div class="control-group">
+            <label class="control-label">Photograph Source</label>
+            <div class="upload-actions">
+              <label for="photoUploadInput" class="btn btn-outline btn-sm upload-btn">
+                <span>Upload Photograph</span>
+                <input type="file" id="photoUploadInput" accept="image/*" hidden>
+              </label>
+              <span class="or-divider">or select plate:</span>
+            </div>
+            <div class="sample-plates">
+              <button type="button" class="sample-btn active" data-img="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=80" title="Plate 01: Vesper">Plate I</button>
+              <button type="button" class="sample-btn" data-img="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1200&q=80" title="Plate 02: Sartorial">Plate II</button>
+              <button type="button" class="sample-btn" data-img="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80" title="Plate 03: Monolith">Plate III</button>
+            </div>
+          </div>
+
+          <!-- Studio Tone Presets -->
+          <div class="control-group">
+            <label class="control-label">Atelier Grade Presets</label>
+            <div class="preset-pills">
+              <button type="button" class="preset-pill active" data-preset="obsidian">Obsidian Warmth</button>
+              <button type="button" class="preset-pill" data-preset="noir">Chiaroscuro Noir</button>
+              <button type="button" class="preset-pill" data-preset="silver">35mm Silver Halide</button>
+              <button type="button" class="preset-pill" data-preset="amber">Honey Ambient</button>
+              <button type="button" class="preset-pill" data-preset="raw">Raw Neutral</button>
+            </div>
+          </div>
+
+          <!-- Fine Adjustments Sliders -->
+          <div class="control-group">
+            <label class="control-label">Sculpt Tone &amp; Atmosphere</label>
+            
+            <div class="slider-row">
+              <div class="slider-info">
+                <span>Exposure</span>
+                <span id="valExposure" class="slider-val">100%</span>
+              </div>
+              <input type="range" id="inputExposure" min="60" max="140" value="100">
+            </div>
+
+            <div class="slider-row">
+              <div class="slider-info">
+                <span>Contrast</span>
+                <span id="valContrast" class="slider-val">115%</span>
+              </div>
+              <input type="range" id="inputContrast" min="70" max="180" value="115">
+            </div>
+
+            <div class="slider-row">
+              <div class="slider-info">
+                <span>Warmth</span>
+                <span id="valWarmth" class="slider-val">25%</span>
+              </div>
+              <input type="range" id="inputWarmth" min="0" max="80" value="25">
+            </div>
+
+            <div class="slider-row">
+              <div class="slider-info">
+                <span>Film Grain</span>
+                <span id="valGrain" class="slider-val">30%</span>
+              </div>
+              <input type="range" id="inputGrain" min="0" max="100" value="30">
+            </div>
+
+            <div class="slider-row">
+              <div class="slider-info">
+                <span>Vignette Depth</span>
+                <span id="valVignette" class="slider-val">40%</span>
+              </div>
+              <input type="range" id="inputVignette" min="0" max="100" value="40">
+            </div>
+          </div>
+
+          <!-- Frame Selection -->
+          <div class="control-group">
+            <label class="control-label">Bespoke Framing</label>
+            <div class="frame-selectors">
+              <button type="button" class="frame-btn active" data-frame="frame-passepartout">Passe-Partout</button>
+              <button type="button" class="frame-btn" data-frame="frame-gallery">Gallery Mat</button>
+              <button type="button" class="frame-btn" data-frame="frame-minimal">Fine Line</button>
+              <button type="button" class="frame-btn" data-frame="frame-raw">Borderless</button>
+            </div>
+          </div>
+
+          <!-- Export & Reset Actions -->
+          <div class="darkroom-actions">
+            <button type="button" id="btnDownload" class="btn btn-primary btn-full">
+              Download Framed Artwork
+            </button>
+            <button type="button" id="btnReset" class="btn btn-outline btn-full">
+              Reset Controls
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- [FEATURE 04] Portfolio Showcase with Category Filters | Added: 2026-11-11 02:48 -->
+    <!-- ========================================================================= -->
+    <section id="portfolio" class="portfolio-section">
+      <div class="section-header">
+        <span class="section-tag">Archive 2026</span>
+        <h2 class="section-title">Selected Works</h2>
+        <!-- Filter Tabs -->
+        <div class="portfolio-filters">
+          <button type="button" class="filter-btn active" data-category="all">All Plates</button>
+          <button type="button" class="filter-btn" data-category="portrait">Portraiture</button>
+          <button type="button" class="filter-btn" data-category="fashion">Haute Fashion</button>
+          <button type="button" class="filter-btn" data-category="atmosphere">Atmosphere</button>
+        </div>
+      </div>
+
+      <div class="portfolio-grid" id="portfolioGrid">
+        <article class="portfolio-card" data-category="portrait" data-title="Nocturne Monologue" data-camera="Leica M11 · Noctilux 50mm ƒ/0.95 · ISO 64" data-year="2026">
+          <div class="card-image-wrap">
+            <img 
+              src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80" 
+              alt="Nocturne Monologue"
+            >
+            <div class="card-overlay"><span>View Study</span></div>
+          </div>
+          <div class="card-meta">
+            <span class="card-num">01</span>
+            <div class="card-info">
+              <h3>Nocturne Monologue</h3>
+              <p>Editorial Portraiture</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="portfolio-card" data-category="fashion" data-title="Velvet Shadows" data-camera="Hasselblad H6D-100c · HC 100mm ƒ/2.2 · ISO 100" data-year="2026">
+          <div class="card-image-wrap">
+            <img 
+              src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80" 
+              alt="Velvet Shadows"
+            >
+            <div class="card-overlay"><span>View Study</span></div>
+          </div>
+          <div class="card-meta">
+            <span class="card-num">02</span>
+            <div class="card-info">
+              <h3>Velvet Shadows</h3>
+              <p>High Fashion &amp; Form</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="portfolio-card" data-category="atmosphere" data-title="Chiaroscuro Silence" data-camera="Pentax 67II · SMC 105mm ƒ/2.4 · Kodak Tri-X 400" data-year="2025">
+          <div class="card-image-wrap">
+            <img 
+              src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" 
+              alt="Chiaroscuro Silence"
+            >
+            <div class="card-overlay"><span>View Study</span></div>
+          </div>
+          <div class="card-meta">
+            <span class="card-num">03</span>
+            <div class="card-info">
+              <h3>Chiaroscuro Silence</h3>
+              <p>Cinematic Atmosphere</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="portfolio-card" data-category="portrait" data-title="Soliloquy in Amber" data-camera="Contax 645 · Zeiss Planar 80mm ƒ/2 · Portra 160" data-year="2026">
+          <div class="card-image-wrap">
+            <img 
+              src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80" 
+              alt="Soliloquy in Amber"
+            >
+            <div class="card-overlay"><span>View Study</span></div>
+          </div>
+          <div class="card-meta">
+            <span class="card-num">04</span>
+            <div class="card-info">
+              <h3>Soliloquy in Amber</h3>
+              <p>Intimate Portraiture</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="portfolio-card" data-category="fashion" data-title="Draped Monolith" data-camera="Phase One IQ4 · Schneider 80mm LS · ISO 50" data-year="2025">
+          <div class="card-image-wrap">
+            <img 
+              src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80" 
+              alt="Draped Monolith"
+            >
+            <div class="card-overlay"><span>View Study</span></div>
+          </div>
+          <div class="card-meta">
+            <span class="card-num">05</span>
+            <div class="card-info">
+              <h3>Draped Monolith</h3>
+              <p>Sculptural Fashion</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="portfolio-card" data-category="atmosphere" data-title="Geometry of Solitude" data-camera="Leica SL2-S · Summilux 35mm ƒ/1.4 · ISO 200" data-year="2026">
+          <div class="card-image-wrap">
+            <img 
+              src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80" 
+              alt="Geometry of Solitude"
+            >
+            <div class="card-overlay"><span>View Study</span></div>
+          </div>
+          <div class="card-meta">
+            <span class="card-num">06</span>
+            <div class="card-info">
+              <h3>Geometry of Solitude</h3>
+              <p>Architectural Shadows</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- [FEATURE 05] Studio Services & Packages Section | Added: 2026-11-11 02:48 -->
+    <!-- ========================================================================= -->
+    <section id="services" class="services-section">
+      <div class="section-header">
+        <span class="section-tag">Offerings &amp; Commissions</span>
+        <h2 class="section-title">The Atelier Sessions</h2>
+        <p class="section-desc">Each session is individually curated. All commissions include analog contact sheets, master retouches, and bespoke archival framing.</p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card">
+          <span class="service-index">Commission I</span>
+          <h3 class="service-title">The Intimate Portrait</h3>
+          <p class="service-desc">A deep, contemplative exploration of personal character. Conceived for collectors, artists, and discerning individuals.</p>
+          <ul class="service-features">
+            <li>3-Hour Private Studio Darkroom Session</li>
+            <li>Warm Chiaroscuro Lighting Architecture</li>
+            <li>8 Master Hand-Graded Archival Prints</li>
+            <li>One Bespoke Wood &amp; Gold-Leaf Framed Piece</li>
+          </ul>
+          <div class="service-footer">
+            <span class="service-rate">&pound;1,800</span>
+            <a href="#contact" class="btn btn-outline btn-sm select-package-btn" data-package="The Intimate Portrait">Book Session</a>
+          </div>
+        </div>
+
+        <div class="service-card service-featured">
+          <div class="featured-badge">Featured Atelier</div>
+          <span class="service-index">Commission II</span>
+          <h3 class="service-title">Editorial &amp; Haute Couture</h3>
+          <p class="service-desc">Complete visual narrative for fashion houses, publications, and luxury maisons. Sculpted with high-fashion restraint.</p>
+          <ul class="service-features">
+            <li>Full-Day Studio &amp; Set Construction</li>
+            <li>Creative Direction &amp; Mood Architecture</li>
+            <li>Full Digital Suite &amp; Analog Medium Format</li>
+            <li>Worldwide Commercial Licensing Included</li>
+          </ul>
+          <div class="service-footer">
+            <span class="service-rate">&pound;4,200</span>
+            <a href="#contact" class="btn btn-primary btn-sm select-package-btn" data-package="Editorial & Haute Couture">Book Session</a>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <span class="service-index">Commission III</span>
+          <h3 class="service-title">Architectural &amp; Still Life</h3>
+          <p class="service-desc">Monographic documentation of spaces, objects, and rare collections under meticulously balanced natural and studio light.</p>
+          <ul class="service-features">
+            <li>On-Location or In-Studio Commission</li>
+            <li>Large Format Perspective Correction</li>
+            <li>Handbound Linen Exhibition Folio</li>
+            <li>Full Archival Master Deliverables</li>
+          </ul>
+          <div class="service-footer">
+            <span class="service-rate">&pound;2,900</span>
+            <a href="#contact" class="btn btn-outline btn-sm select-package-btn" data-package="Architectural & Still Life">Book Session</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Studio Philosophy / Statement -->
+    <section id="atelier" class="statement-section">
+      <div class="statement-container">
+        <p class="statement-eyebrow">The Atelier Method</p>
+        <blockquote class="statement-quote">
+          "Every frame is an exercise in restraint. We sculpt with deep shadow and warm ambient light until only the essential emotion remains."
+        </blockquote>
+        <p class="statement-author">— FRAMEIT STUDIO, LONDON &amp; PARIS</p>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- [FEATURE 06] Interactive Booking & Inquiry Form | Added: 2026-11-11 02:48 -->
+    <!-- ========================================================================= -->
+    <section id="contact" class="contact-section">
+      <div class="contact-container">
+        <div class="contact-info">
+          <span class="section-tag">Private Inquiries</span>
+          <h2 class="section-title">Initiate a Commission</h2>
+          <p class="contact-subtext">
+            Studio sessions are strictly limited per quarter to preserve devotion to craft. Please share your project scope, timeline, and vision below.
+          </p>
+          <div class="studio-coords">
+            <div class="coord-item">
+              <span class="coord-label">Studio Location</span>
+              <span class="coord-val">14 Rue de Beaujolais, Paris &middot; Mayfair, London</span>
+            </div>
+            <div class="coord-item">
+              <span class="coord-label">Private Line</span>
+              <span class="coord-val">+44 (0) 20 7946 0912</span>
+            </div>
+            <div class="coord-item">
+              <span class="coord-label">Electronic Post</span>
+              <span class="coord-val">atelier@frameitstudio.com</span>
+            </div>
+          </div>
+        </div>
+
+        <form id="inquiryForm" class="inquiry-form">
+          <div class="form-row">
+            <div class="form-field">
+              <label for="clientName">Full Name</label>
+              <input type="text" id="clientName" placeholder="e.g. Julian Sterling" required>
+            </div>
+            <div class="form-field">
+              <label for="clientEmail">Email Address</label>
+              <input type="email" id="clientEmail" placeholder="e.g. julian@atelier.com" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-field">
+              <label for="commissionType">Commission Focus</label>
+              <select id="commissionType" required>
+                <option value="The Intimate Portrait">Commission I: The Intimate Portrait</option>
+                <option value="Editorial & Haute Couture" selected>Commission II: Editorial &amp; Haute Couture</option>
+                <option value="Architectural & Still Life">Commission III: Architectural &amp; Still Life</option>
+                <option value="Custom Darkroom Project">Custom Private Commission</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="desiredDate">Target Date / Window</label>
+              <input type="text" id="desiredDate" placeholder="e.g. Autumn 2026">
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label for="clientVision">Vision &amp; Narrative Details</label>
+            <textarea id="clientVision" rows="4" placeholder="Describe the aesthetic, subjects, or special requirements..."></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-full submit-btn">
+            <span>Send Commission Inquiry</span>
+          </button>
+          
+          <div id="formSuccessMessage" class="form-success-banner" style="display: none;">
+            <em>Inquiry received with gratitude. Our studio manager will contact you within 24 hours.</em>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================= -->
+  <!-- [FEATURE 07] Fullscreen Photo Lightbox Modal | Added: 2026-11-11 02:48    -->
+  <!-- ========================================================================= -->
+  <div id="photoLightbox" class="lightbox-modal" aria-hidden="true">
+    <div class="lightbox-backdrop"></div>
+    <div class="lightbox-dialog">
+      <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Close Lightbox">&times;</button>
+      <div class="lightbox-media">
+        <img id="lightboxImg" src="" alt="Enlarged study">
+      </div>
+      <div class="lightbox-details">
+        <h4 id="lightboxTitle" class="lightbox-title">Series Title</h4>
+        <p id="lightboxCamera" class="lightbox-meta">Camera &amp; Lens Specifications</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Studio Footer -->
+  <footer class="studio-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="#" class="logo">Frame It</a>
+        <p>Private photographic atelier. Available worldwide for commissions.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#darkroom">Darkroom</a>
+        <a href="#portfolio">Archive</a>
+        <a href="#services">Commissions</a>
+        <a href="#contact">Inquiries</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 FRAMEIT Photographic Atelier. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ========================================================================= -->
+  <!-- [FEATURE 08] Studio Script Engine | Added: 2026-11-11 02:48               -->
+  <!-- ========================================================================= -->
+  <script src="script.js"></script>
+</body>
+</html>
